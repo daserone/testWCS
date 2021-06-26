@@ -27,27 +27,22 @@
       </mat-list-item>
       <!-- MENU DE CASAS HP -->
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="changeTable('all','Slytherin')">
-          
-          <span>Slytherin</span>
-        </button>
-        <button mat-menu-item (click)="changeTable('all','Gryffindor')"> 
-         
-          <span>Gryffindor</span>
-        </button>
-        <button mat-menu-item (click)="changeTable('all','Hufflepuff')">
-          
-          <span>Hufflepuff</span>
-        </button>
-        <button mat-menu-item (click)="changeTable('all','Ravenclaw')">
-          
-          <span>Ravenclaw</span>
-        </button>
+        <ng-container  *ngFor="let house of houses">
+          <button mat-menu-item (click)="changeTable('all',house.name)" [class]="house.class">
+            <span>{{house.name}}</span>
+            <img style="width: 35px;height: 35px;margin-top: 5px;" [src]="house.imgUrl" alt="">
+          </button>
+        </ng-container>
       </mat-menu>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary" [ngClass]="{
+      'gryf':title==='Gryffindor',
+      'slyt':title==='Slytherin',
+      'huff':title==='Hufflepuff',
+      'rav':title==='Ravenclaw'
+    }">
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -57,6 +52,8 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span style="text-transform: uppercase;">{{title}}</span>
+      
+      <img style="width: 50px;height: 50px;margin-top: 5px;" *ngIf="title !== 'staff' && title !== 'students' && title !== 'characters' "  [src]="filterImg(title)" alt="">
     </mat-toolbar>
     <!-- CONTENEDOR PRINCIPAL -->
     <ng-container *ngIf="characterList.length!=0;else noData">
@@ -87,6 +84,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12 p-4 text-center">
+            <img style="width: 80%;" src="https://imaginajuguetes.com/pub/media/catalog/category/harry-potter-logo.png" alt="">
             <h1>Select a character...</h1>
 
           </div>

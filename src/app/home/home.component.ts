@@ -12,7 +12,30 @@ import { Character } from '../shared/models/characters';
 })
 export class HomeComponent {
   characterList: Character[] = [];
-  title: string = 'Characters';
+  img:string;
+  houses:any[]=[
+    {
+      class:'gryf',
+      imgUrl:'https://i.pinimg.com/originals/4b/bb/81/4bbb816e7a69c34c45a0faf452f10b06.gif',
+      name:'Gryffindor'
+    },
+    {
+      class:'slyt',
+      imgUrl:'https://www.pngkit.com/png/full/106-1068382_hogwarts-sorting-quiz-harry-potter-slytherin-logo.png',
+      name:'Slytherin'
+    },
+    {
+      class:'huff',
+      imgUrl:'https://i.pinimg.com/originals/b9/cf/a4/b9cfa4d2461073c122d53a959d1fcb1e.png',
+      name:'Hufflepuff'
+    },
+    {
+      class:'rav',
+      imgUrl:'https://i2.wp.com/www.vippng.com/png/full/511-5111239_freetoedit-ravenclaw-hogwarts-harrypotterforever-ravenclaw-house-ravenclaw-logo.png',
+      name:'Ravenclaw'
+    },
+  ]
+  title: string = 'characters';
   loading: boolean = false;
   currentYear: number;
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -53,5 +76,14 @@ export class HomeComponent {
         });
       });
     });
+  }
+  filterImg(houseName){
+    console.log(houseName);
+    for (let index = 0; index < this.houses.length; index++) {
+     if(this.houses[index].name === houseName){
+      return this.houses[index].imgUrl
+     }
+      
+    }
   }
 }
