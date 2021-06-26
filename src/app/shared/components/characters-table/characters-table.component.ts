@@ -12,7 +12,7 @@ export class CharactersTableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sort: MatSort;
   dataSource ;
   @Input() characters: Character[] = [];
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
+
   displayedColumns: string[] = ['name','patronus','age','image'];
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -23,6 +23,7 @@ export class CharactersTableComponent implements AfterViewInit, OnInit {
   
   }
   ngOnChanges(changes: SimpleChanges): void {
+  //SI EL ARRAY DE CHARACTERS TIENE DATOS SE MODIFICAN LOS DATOS DE LA TABLA
       if(this.characters.length!=0){
         this.dataSource=new MatTableDataSource(this.characters);
         this.dataSource.sort = this.sort;

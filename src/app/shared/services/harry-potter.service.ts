@@ -9,15 +9,11 @@ export class HarryPotterService {
 
   constructor(private http:HttpClient) { }
 
-  getFromHouse(house,){
-    return this.http.get<Character>('http://hp-api.herokuapp.com/api/characters/house/'+ house)
-  }
-  getStudens(){
-    return this.http.get<Character>('http://hp-api.herokuapp.com/api/characters/students')
-  }
-  getStaff(){
-    return this.http.get<Character>('http://hp-api.herokuapp.com/api/characters/staff')
-  }
+  /**
+   * @name getCharacters
+   * @author Daniel Ramirez
+   * @description request data on Harry Potter characters
+   */
   getCharacters(from,house?){
     if(from === 'all'){
       return this.http.get<Character>('http://hp-api.herokuapp.com/api/characters/house/'+ house)

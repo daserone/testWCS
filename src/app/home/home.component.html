@@ -3,15 +3,29 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
+      <!-- SIDENAV TITLE -->
     <mat-toolbar>Harry Potter Catalog</mat-toolbar>
+    <!-- SIDENAV -->
     <mat-nav-list>
       <mat-list-item>
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <span mat-list-item >Characters </span>
+          </button>
+      </mat-list-item>
+   
+      <mat-list-item>
+        <button mat-icon-button (click)="changeTable('students')">
+          <span mat-list-item >Students </span>
           
         </button>
       </mat-list-item>
-   
+      <mat-list-item>
+        <button mat-icon-button (click)="changeTable('staff')">
+          <span mat-list-item >Staff </span>
+          
+        </button>
+      </mat-list-item>
+      <!-- MENU DE CASAS HP -->
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="changeTable('all','Slytherin')">
           
@@ -30,18 +44,6 @@
           <span>Ravenclaw</span>
         </button>
       </mat-menu>
-      <mat-list-item>
-        <button mat-icon-button (click)="changeTable('students')">
-          <span mat-list-item >Students </span>
-          
-        </button>
-      </mat-list-item>
-      <mat-list-item>
-        <button mat-icon-button (click)="changeTable('staff')">
-          <span mat-list-item >Staff </span>
-          
-        </button>
-      </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -56,7 +58,7 @@
       </button>
       <span style="text-transform: uppercase;">{{title}}</span>
     </mat-toolbar>
-    <!-- Add Content Here -->
+    <!-- CONTENEDOR PRINCIPAL -->
     <ng-container *ngIf="characterList.length!=0;else noData">
       <ng-container *ngIf="!loading;else spinner">
         <div class="container">
