@@ -1,0 +1,96 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Harry Potter Catalog</mat-toolbar>
+    <mat-nav-list>
+      <mat-list-item>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <span mat-list-item >Characters </span>
+          
+        </button>
+      </mat-list-item>
+   
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="changeTable('all','Slytherin')">
+          
+          <span>Slytherin</span>
+        </button>
+        <button mat-menu-item (click)="changeTable('all','Gryffindor')"> 
+         
+          <span>Gryffindor</span>
+        </button>
+        <button mat-menu-item (click)="changeTable('all','Hufflepuff')">
+          
+          <span>Hufflepuff</span>
+        </button>
+        <button mat-menu-item (click)="changeTable('all','Ravenclaw')">
+          
+          <span>Ravenclaw</span>
+        </button>
+      </mat-menu>
+      <mat-list-item>
+        <button mat-icon-button (click)="changeTable('students')">
+          <span mat-list-item >Students </span>
+          
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-icon-button (click)="changeTable('staff')">
+          <span mat-list-item >Staff </span>
+          
+        </button>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span style="text-transform: uppercase;">{{title}}</span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <ng-container *ngIf="characterList.length!=0;else noData">
+      <ng-container *ngIf="!loading;else spinner">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 p-4">
+              <app-characters-table [characters]="characterList" ></app-characters-table>
+            </div>
+          </div>
+        </div>
+      
+
+      </ng-container>
+      <ng-template #spinner>
+        <div class="container">
+          <div class="row">
+            <div class="col-12 d-flex justify-content-center align-items-center p-5">
+              <mat-spinner></mat-spinner>
+            </div>
+          </div>
+        </div>
+        
+      </ng-template>
+      
+    </ng-container>
+    <ng-template #noData>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 p-4 text-center">
+            <h1>Select a character...</h1>
+
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    
+  </mat-sidenav-content>
+</mat-sidenav-container>
