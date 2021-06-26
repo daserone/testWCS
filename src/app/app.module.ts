@@ -20,11 +20,14 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+import { ReactiveFormsModule } from '@angular/forms';
+import { NewStudentComponent } from './new-student/new-student.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    CharactersTableComponent
+    CharactersTableComponent,
+    NewStudentComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    MatInputModule
+    MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

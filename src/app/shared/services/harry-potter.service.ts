@@ -6,7 +6,7 @@ import { Character } from '../models/characters';
   providedIn: 'root'
 })
 export class HarryPotterService {
-
+  newStudent:any = [];
   constructor(private http:HttpClient) { }
 
   /**

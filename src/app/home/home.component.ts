@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { HarryPotterService } from '../shared/services/harry-potter.service';
 import { Character } from '../shared/models/characters';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,29 +12,33 @@ import { Character } from '../shared/models/characters';
 })
 export class HomeComponent {
   characterList: Character[] = [];
-  img:string;
-  houses:any[]=[
+  img: string;
+  houses: any[] = [
     {
-      class:'gryf',
-      imgUrl:'https://i.pinimg.com/originals/4b/bb/81/4bbb816e7a69c34c45a0faf452f10b06.gif',
-      name:'Gryffindor'
+      class: 'gryf',
+      imgUrl:
+        'https://i.pinimg.com/originals/4b/bb/81/4bbb816e7a69c34c45a0faf452f10b06.gif',
+      name: 'Gryffindor',
     },
     {
-      class:'slyt',
-      imgUrl:'https://www.pngkit.com/png/full/106-1068382_hogwarts-sorting-quiz-harry-potter-slytherin-logo.png',
-      name:'Slytherin'
+      class: 'slyt',
+      imgUrl:
+        'https://www.pngkit.com/png/full/106-1068382_hogwarts-sorting-quiz-harry-potter-slytherin-logo.png',
+      name: 'Slytherin',
     },
     {
-      class:'huff',
-      imgUrl:'https://i.pinimg.com/originals/b9/cf/a4/b9cfa4d2461073c122d53a959d1fcb1e.png',
-      name:'Hufflepuff'
+      class: 'huff',
+      imgUrl:
+        'https://i.pinimg.com/originals/b9/cf/a4/b9cfa4d2461073c122d53a959d1fcb1e.png',
+      name: 'Hufflepuff',
     },
     {
-      class:'rav',
-      imgUrl:'https://i2.wp.com/www.vippng.com/png/full/511-5111239_freetoedit-ravenclaw-hogwarts-harrypotterforever-ravenclaw-house-ravenclaw-logo.png',
-      name:'Ravenclaw'
+      class: 'rav',
+      imgUrl:
+        'https://i2.wp.com/www.vippng.com/png/full/511-5111239_freetoedit-ravenclaw-hogwarts-harrypotterforever-ravenclaw-house-ravenclaw-logo.png',
+      name: 'Ravenclaw',
     },
-  ]
+  ];
   title: string = 'characters';
   loading: boolean = false;
   currentYear: number;
@@ -47,7 +51,8 @@ export class HomeComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private hpService: HarryPotterService
+    private hpService: HarryPotterService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -75,15 +80,30 @@ export class HomeComponent {
           image: character.image,
         });
       });
+      if (from === 'students') {
+        this.hpService.newStudent.forEach((element) => {
+          this.characterList.unshift(element);
+        });
+      }
+      this.characterList = [...this.characterList];
+      console.log(this.characterList);
     });
   }
-  filterImg(houseName){
+  /**
+   * @name filterImg
+   * @author Daniel Ramirez
+   * @description filter image to show on house selection
+   */
+  filterImg(houseName) {
     console.log(houseName);
     for (let index = 0; index < this.houses.length; index++) {
-     if(this.houses[index].name === houseName){
-      return this.houses[index].imgUrl
-     }
-      
+      if (this.houses[index].name === houseName) {
+        return this.houses[index].imgUrl;
+      }
     }
+  }
+
+  addNew() {
+    this.router.navigate(['new-student']);
   }
 }
