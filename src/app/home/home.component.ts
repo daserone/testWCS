@@ -45,10 +45,10 @@ export class HomeComponent {
       res.forEach((character) => {
         this.characterList.push({
           name: character.name,
-          patronus: character.patronus ? character.patronus : 'undefined',
+          patronus: character.patronus ? character.patronus : 'unknown',
           age: character.yearOfBirth
             ? this.currentYear - character.yearOfBirth
-            : 'undefined',
+            : 'unknown',
           image: character.image,
         });
       });
