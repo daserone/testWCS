@@ -13,12 +13,16 @@
                   <div class="col">
                     <input type="number" class="form-control" formControlName="age" placeholder="Age" aria-label="Age">
                   </div>
+                  <div class="col">
+                    <input type="file" class="form-control" (change)="uploadImg($event)" formControlName="image" placeholder="Upload Image" aria-label="image">
+                  </div>
                 </div>
                 
                 <button type="submit" [disabled]="!newStudent.valid" mat-raised-button color="primary" class="text-center my-4">Add Student</button>
               </form>
               
             </div>
+            
             <img style="width: 80%;" class="mx-auto" src="https://imaginajuguetes.com/pub/media/catalog/category/harry-potter-logo.png" alt="">
           </div>
 
